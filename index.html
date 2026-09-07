@@ -1,79 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>m23 · Menús AR · Previews</title>
-  <style>
-    :root {
-      --bg: #070f1a;
-      --surface: #0f2137;
-      --border: #1e3a5f;
-      --text: #f0f9ff;
-      --muted: #94a3b8;
-      --grad: linear-gradient(135deg, #2563eb, #0ea5e9, #06b6d4);
-      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh;
-      padding: 40px 20px 60px;
-      background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.25), transparent);
-    }
-    .wrap { max-width: 720px; margin: 0 auto; }
-    h1 {
-      font-size: 1.75rem; font-weight: 800; margin-bottom: 8px;
-      background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .lead { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; line-height: 1.5; }
-    .grid { display: grid; gap: 14px; }
-    a.card {
-      display: block; text-decoration: none; color: inherit;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-      padding: 18px 20px; transition: border-color 0.15s, transform 0.15s;
-    }
-    a.card:hover { border-color: #3b82f6; transform: translateY(-2px); }
-    a.card h2 { font-size: 1.05rem; margin-bottom: 6px; }
-    a.card p { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
-    .tag {
-      display: inline-block; margin-top: 10px; font-size: 0.72rem; font-weight: 600;
-      padding: 3px 10px; border-radius: 999px; background: rgba(37,99,235,0.2); color: #93c5fd;
-    }
-    footer { margin-top: 36px; font-size: 0.8rem; color: #64748b; }
-    footer a { color: #67e8f9; }
-  </style>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>m23 · Menús AR</title>
+<style>
+:root{--bg:#fff;--bg-soft:#f8fafc;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;--blue:#2563eb;--grad:linear-gradient(135deg,#2563eb,#0ea5e9,#06b6d4);--shadow:0 1px 3px rgba(15,23,42,.06);--font:system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font);background:#fff;color:var(--text);min-height:100vh}
+.app-header{display:flex;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border)}
+.app-header .left{display:flex;align-items:center;gap:12px}
+.title{font-weight:700;font-size:.95rem}.sub{font-size:.75rem;color:var(--muted)}
+.hero{max-width:720px;margin:0 auto;padding:48px 20px}
+.hero h1{font-size:1.8rem;margin-bottom:8px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);margin-bottom:28px}
+.grid{display:grid;gap:12px}
+.grid a{display:block;padding:18px 20px;border:1px solid var(--border);border-radius:14px;text-decoration:none;color:inherit;box-shadow:var(--shadow)}
+.grid a:hover{border-color:#93c5fd}
+.grid a h2{font-size:1.05rem;margin-bottom:4px}.grid a p{font-size:.85rem;color:var(--muted)}
+.tag{display:inline-block;margin-top:8px;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:999px;background:#eff6ff;color:#1d4ed8}
+.site-footer{margin-top:40px;padding:20px;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:.78rem}
+.site-footer strong{color:var(--blue)}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>m23 · Menús AR</h1>
-    <p class="lead">
-      Previews de interfaces del SaaS multi-tenant: login, super admin, panel del restaurante y menú público white-label.
-    </p>
-    <div class="grid">
-      <a class="card" href="previews/login.html">
-        <h2>Login</h2>
-        <p>Inicio de sesión con Google, Apple y correo. Branding m23.</p>
-        <span class="tag">Auth</span>
-      </a>
-      <a class="card" href="previews/super-admin.html">
-        <h2>Super Admin</h2>
-        <p>Dashboard global, restaurantes, dominios, cola 3D y tickets de soporte.</p>
-        <span class="tag">Plataforma</span>
-      </a>
-      <a class="card" href="previews/restaurant-admin.html">
-        <h2>Panel restaurante · Koke Pollo</h2>
-        <p>Gestión de menú, subida de media, AR y dominio propio (kokepollo.cl).</p>
-        <span class="tag">Cliente</span>
-      </a>
-      <a class="card" href="previews/menu-koke-pollo.html">
-        <h2>Menú público · Koke Pollo</h2>
-        <p>Vista del comensal: white-label + botón Ver en AR / 360°.</p>
-        <span class="tag">Público</span>
-      </a>
-    </div>
-    <footer>
-      Repo: <a href="https://github.com/TyrYugen/m23-menus-ar">github.com/TyrYugen/m23-menus-ar</a>
-    </footer>
+<header class="app-header">
+  <div class="left">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 36" width="140" height="32" aria-label="m23"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#2563eb"/><stop offset="50%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs><g fill="url(#mg)"><path d="M2 6h28l-4 24H0z"/><path d="M34 6h28l-4 24H30z" opacity=".9"/><path d="M66 6h28l-4 24H62z" opacity=".75"/><path d="M98 6h28l-4 24H94z" opacity=".6"/><path d="M130 6h28l-4 24H126z" opacity=".5"/></g></svg>
+    <div><div class="title">m23</div><div class="sub">Menús con realidad aumentada</div></div>
   </div>
+</header>
+<div class="hero">
+  <h1>Plataforma m23</h1>
+  <p>Interfaces conectadas. En producción el login redirige según el rol (super admin o admin del local).</p>
+  <div class="grid">
+    <a href="previews/login.html"><h2>Iniciar sesión</h2><p>Google, Apple o correo electrónico</p><span class="tag">Auth</span></a>
+    <a href="previews/super-admin.html"><h2>Super Admin</h2><p>Gestión global, restaurantes, soporte y 3D</p><span class="tag">Plataforma</span></a>
+    <a href="previews/restaurant-admin.html"><h2>Panel del local · Koke Pollo</h2><p>Menú, logo, dominio y modelos AR</p><span class="tag">Cliente</span></a>
+    <a href="previews/menu-koke-pollo.html"><h2>Menú público · Koke Pollo</h2><p>Vista del comensal (solo lectura; editable solo por admins)</p><span class="tag">Público</span></a>
+  </div>
+</div>
+<footer class="site-footer">Tecnología <strong>m23</strong> · Plataforma registrada de menús digitales con AR</footer>
 </body>
 </html>
