@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Panel · Koke Pollo</title>
+<style>
+:root{--bg:#070f1a;--sidebar:#0a1628;--surface:#0f2137;--surface2:#12263f;--border:#1e3a5f;--text:#f0f9ff;--muted:#94a3b8;--grad:linear-gradient(135deg,#2563eb,#0ea5e9,#06b6d4);--accent:#f97316;--success:#22c55e;--font:system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+aside{width:230px;background:var(--sidebar);border-right:1px solid var(--border);padding:20px 12px;display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.brand{padding:8px 10px 18px}.brand .name{font-weight:700;font-size:1rem}.brand .sub{font-size:.72rem;color:var(--muted);margin-top:2px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--muted);font-size:.86rem;font-weight:500;cursor:pointer;border:none;background:transparent;width:100%;text-align:left}
+.nav-item:hover,.nav-item.active{background:var(--surface);color:var(--text)}.nav-item.active{box-shadow:inset 3px 0 0 #f97316}
+main{flex:1;padding:22px 26px;overflow:auto}
+.top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.top h1{font-size:1.35rem}.top p{color:var(--muted);font-size:.84rem;margin-top:4px}
+.btn{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:600;font-size:.86rem;cursor:pointer}
+.btn-orange{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:600;font-size:.86rem;cursor:pointer}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:9px 14px;font-size:.84rem;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}.stat .label{color:var(--muted);font-size:.75rem}.stat .value{font-size:1.45rem;font-weight:700;margin-top:4px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.panel-h{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600;gap:10px;flex-wrap:wrap}
+.url-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 16px;background:#0a1628;border-bottom:1px solid var(--border)}
+.url-box code{background:#12263f;padding:8px 12px;border-radius:8px;font-size:.82rem;color:#67e8f9;border:1px solid var(--border)}
+.dish{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 16px;border-bottom:1px solid #152a45}
+.thumb{width:64px;height:64px;border-radius:10px;background:#1c1917;display:grid;place-items:center;font-size:1.6rem}
+.dish h3{font-size:.92rem;font-weight:650}.dish .meta{font-size:.78rem;color:var(--muted);margin-top:3px}
+.price{font-weight:700;color:#fb923c;font-size:.95rem;text-align:right}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600;margin-left:6px}
+.pill-ok{background:rgba(34,197,94,.15);color:#4ade80}.pill-pend{background:rgba(245,158,11,.15);color:#fbbf24}
+.dish-actions{display:flex;gap:6px;margin-top:6px}.dish-actions button{background:var(--surface2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 9px;font-size:.72rem;cursor:pointer}
+.upload-zone{margin:16px;border:2px dashed var(--border);border-radius:12px;padding:28px;text-align:center;color:var(--muted);font-size:.88rem}.upload-zone strong{color:var(--text);display:block;margin-bottom:6px}
+.domain-card{padding:16px;display:grid;gap:12px}.domain-card label{font-size:.78rem;color:var(--muted);font-weight:600}
+.domain-card input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0a1628;color:var(--text)}
+.dns-box{background:#0a1628;border:1px solid var(--border);border-radius:10px;padding:12px;font-family:ui-monospace,monospace;font-size:.78rem;color:#94a3b8;line-height:1.6}.dns-box b{color:#67e8f9}
+@media(max-width:800px){aside{display:none}.dish{grid-template-columns:56px 1fr}.price{grid-column:2;text-align:left}}
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand"><div class="name">Koke Pollo</div><div class="sub">Panel del restaurante</div></div>
+  <button class="nav-item active">Menú / Platos</button>
+  <button class="nav-item">Mi menú público</button>
+  <button class="nav-item">Subir foto / video</button>
+  <button class="nav-item">Estadísticas</button>
+  <button class="nav-item">Soporte</button>
+  <button class="nav-item">Configuración</button>
+  <div style="flex:1"></div>
+  <button class="nav-item" onclick="location.href='login.html'">Salir</button>
+</aside>
+<main>
+  <div class="top">
+    <div><h1>Menú · Koke Pollo</h1><p>Gestiona platos, 3D/AR y tu URL pública</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn-ghost" onclick="location.href='menu-koke-pollo.html'">Ver menú público</button>
+      <button class="btn-orange">+ Nuevo plato</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="label">Platos</div><div class="value">14</div></div>
+    <div class="stat"><div class="label">Con AR listo</div><div class="value">11</div></div>
+    <div class="stat"><div class="label">Vistas AR (7d)</div><div class="value">312</div></div>
+    <div class="stat"><div class="label">Visitas menú</div><div class="value">1.8k</div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><span>Mi menú público</span><button class="btn-ghost">Copiar QR</button></div>
+    <div class="url-box">
+      <span style="font-size:.8rem;color:var(--muted)">Subdominio</span>
+      <code>https://kokepollo.m23.app</code>
+      <span style="font-size:.8rem;color:var(--muted)">Dominio propio</span>
+      <code>https://kokepollo.cl</code>
+      <span class="pill pill-ok">activo</span>
+    </div>
+    <div class="domain-card">
+      <div><label>Dominio personalizado</label><input type="text" value="kokepollo.cl" readonly/></div>
+      <div class="dns-box">Configura en tu DNS:<br/><b>CNAME</b> @ → cname.m23.app<br/><b>TXT</b> _m23-verify → m23-verify=a1b2c3d4</div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><span>Platos</span><button class="btn">Subir foto / video 3D</button></div>
+    <div class="upload-zone"><strong>Arrastra una foto o video del plato</strong>El sistema genera el modelo 3D automáticamente (GLB + USDZ)</div>
+    <div class="dish"><div class="thumb">🍗</div><div><h3>1/4 Pollo a la brasa <span class="pill pill-ok">AR listo</span></h3><div class="meta">Brasas · hace 2 días</div><div class="dish-actions"><button>Editar</button><button>Ver AR</button></div></div><div class="price">$4.990</div></div>
+    <div class="dish"><div class="thumb">🍗🍟</div><div><h3>1/2 Pollo + papas <span class="pill pill-ok">AR listo</span></h3><div class="meta">Combos · hace 2 días</div><div class="dish-actions"><button>Editar</button><button>Ver AR</button></div></div><div class="price">$9.490</div></div>
+    <div class="dish"><div class="thumb">🥗</div><div><h3>Ensalada César <span class="pill pill-pend">Procesando 3D</span></h3><div class="meta">Subido hace 20 min</div><div class="dish-actions"><button>Editar</button></div></div><div class="price">$5.490</div></div>
+    <div class="dish"><div class="thumb">🥤</div><div><h3>Bebida 1.5 L</h3><div class="meta">Bebidas · Sin 3D</div><div class="dish-actions"><button>Editar</button><button>Subir media</button></div></div><div class="price">$1.890</div></div>
+  </div>
+</main>
+</body>
+</html>
