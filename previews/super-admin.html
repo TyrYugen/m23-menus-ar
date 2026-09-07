@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Super Admin · m23</title>
+<style>
+:root{--bg:#070f1a;--sidebar:#0a1628;--surface:#0f2137;--surface2:#12263f;--border:#1e3a5f;--text:#f0f9ff;--muted:#94a3b8;--grad:linear-gradient(135deg,#2563eb,#0ea5e9,#06b6d4);--success:#22c55e;--warn:#f59e0b;--font:system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+aside{width:240px;background:var(--sidebar);border-right:1px solid var(--border);padding:20px 14px;display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 10px 20px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--muted);font-size:.88rem;font-weight:500;cursor:pointer;border:none;background:transparent;width:100%;text-align:left}
+.nav-item:hover,.nav-item.active{background:var(--surface);color:var(--text)}
+.nav-item.active{box-shadow:inset 3px 0 0 #3b82f6}
+.badge-nav{margin-left:auto;background:#ef4444;color:#fff;font-size:.7rem;padding:2px 7px;border-radius:999px}
+main{flex:1;padding:24px 28px;overflow:auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.top h1{font-size:1.4rem}.top p{color:var(--muted);font-size:.85rem;margin-top:4px}
+.btn{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:600;font-size:.88rem;cursor:pointer}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.85rem;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.stat .label{color:var(--muted);font-size:.78rem;margin-bottom:6px}.stat .value{font-size:1.6rem;font-weight:700}.stat .delta{font-size:.75rem;color:var(--success);margin-top:4px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.panel-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{text-align:left;padding:10px 16px;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase;border-bottom:1px solid var(--border)}
+td{padding:12px 16px;border-bottom:1px solid #152a45}tr:hover td{background:rgba(37,99,235,.06)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:600}
+.pill-ok{background:rgba(34,197,94,.15);color:#4ade80}.pill-pend{background:rgba(245,158,11,.15);color:#fbbf24}.pill-off{background:rgba(148,163,184,.15);color:#94a3b8}
+.actions{display:flex;gap:6px}.actions button{background:var(--surface2);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:6px 10px;font-size:.75rem;cursor:pointer}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:900px){aside{display:none}.grid2{grid-template-columns:1fr}}
+.ticket{padding:12px 16px;border-bottom:1px solid #152a45}.ticket .t-title{font-weight:600;font-size:.88rem;margin-bottom:4px}.ticket .t-meta{font-size:.75rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand">m23 · Super Admin</div>
+  <button class="nav-item active">Dashboard</button>
+  <button class="nav-item">Restaurantes</button>
+  <button class="nav-item">Usuarios</button>
+  <button class="nav-item">Modelos 3D</button>
+  <button class="nav-item">Soporte <span class="badge-nav">3</span></button>
+  <button class="nav-item">Configuración</button>
+  <div style="flex:1"></div>
+  <button class="nav-item" onclick="location.href='login.html'">Salir</button>
+</aside>
+<main>
+  <div class="top">
+    <div><h1>Dashboard</h1><p>Resumen global de la plataforma m23</p></div>
+    <button class="btn">+ Nuevo restaurante</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="label">Restaurantes</div><div class="value">12</div><div class="delta">+2 este mes</div></div>
+    <div class="stat"><div class="label">Platos activos</div><div class="value">186</div><div class="delta">+24 esta semana</div></div>
+    <div class="stat"><div class="label">Vistas AR (30d)</div><div class="value">4.2k</div><div class="delta">+18%</div></div>
+    <div class="stat"><div class="label">Tickets abiertos</div><div class="value">3</div><div class="delta" style="color:var(--warn)">Requieren atención</div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><span>Restaurantes</span><button class="btn-ghost">Ver todos</button></div>
+    <table>
+      <thead><tr><th>Nombre</th><th>Subdominio</th><th>Dominio propio</th><th>Estado</th><th>Platos</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><strong>Koke Pollo</strong></td><td>kokepollo.m23.app</td><td>kokepollo.cl <span class="pill pill-ok">activo</span></td><td><span class="pill pill-ok">Activo</span></td><td>14</td><td class="actions"><button>Soporte</button><button>Editar</button></td></tr>
+        <tr><td><strong>La Parrilla del Centro</strong></td><td>laparrilla.m23.app</td><td>—</td><td><span class="pill pill-ok">Activo</span></td><td>22</td><td class="actions"><button>Soporte</button><button>Editar</button></td></tr>
+        <tr><td><strong>Sushi Nikkei</strong></td><td>sushinikkei.m23.app</td><td>menu.sushinikkei.cl <span class="pill pill-pend">pendiente</span></td><td><span class="pill pill-ok">Activo</span></td><td>31</td><td class="actions"><button>Soporte</button><button>Editar</button></td></tr>
+        <tr><td><strong>Café Aurora</strong></td><td>aurora.m23.app</td><td>—</td><td><span class="pill pill-off">Pausado</span></td><td>8</td><td class="actions"><button>Soporte</button><button>Editar</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="panel-h"><span>Cola de modelos 3D</span></div>
+      <table>
+        <thead><tr><th>Plato</th><th>Restaurante</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>1/4 Pollo a la brasa</td><td>Koke Pollo</td><td><span class="pill pill-ok">Listo</span></td></tr>
+          <tr><td>Rollos California</td><td>Sushi Nikkei</td><td><span class="pill pill-pend">Procesando</span></td></tr>
+          <tr><td>Bife de chorizo</td><td>La Parrilla</td><td><span class="pill pill-pend">Procesando</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><span>Tickets de soporte</span></div>
+      <div class="ticket"><div class="t-title">No carga el modelo AR en iPhone</div><div class="t-meta">Koke Pollo · hace 2 h</div></div>
+      <div class="ticket"><div class="t-title">Cambiar subdominio</div><div class="t-meta">La Parrilla · hace 5 h</div></div>
+      <div class="ticket"><div class="t-title">Verificación de dominio</div><div class="t-meta">Sushi Nikkei · ayer</div></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
