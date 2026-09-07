@@ -2,68 +2,41 @@
 
 Plataforma SaaS multi-tenant de **menús digitales con Realidad Aumentada (WebAR)** para restaurantes.
 
-Marca: **m23** · White-label total (subdominio de plataforma o dominio propio del local, ej. `kokepollo.cl`).
+Marca: **m23** · White-label (subdominio o dominio propio del local, ej. `kokepollo.cl`).
 
-## Características
+## GitHub Pages (previews en vivo)
 
-- **3 interfaces**
-  - Super Admin (+ soporte)
-  - Panel del restaurante (self-service)
-  - Menú público 100 % white-label
-- **Login**: Google · Apple · Email/contraseña (Supabase Auth)
-- **AR / 360°**: `@google/model-viewer` (WebXR, AR Quick Look, Scene Viewer)
-- **Dominios**
-  - Subdominio: `restaurante.tudominio.com`
-  - Dominio propio del cliente: `kokepollo.cl` (CNAME + verificación)
-- **Cloudflare**: wildcard DNS, Custom Hostnames, WAF, SSL
-- **Automatización 3D**: foto/video → modelo GLB/USDZ
+Cuando actives Pages (Settings → Pages → Branch: `main` / folder: `/ (root)`), la URL base será:
 
-## Previews (HTML estático)
+**https://tyryugen.github.io/m23-menus-ar/**
 
-| Archivo | Descripción |
-|---------|-------------|
-| [previews/login.html](previews/login.html) | Pantalla de inicio de sesión (branding m23) |
-| [previews/menu-koke-pollo.html](previews/menu-koke-pollo.html) | Ejemplo de menú público white-label + botón AR |
+| Página | URL |
+|--------|-----|
+| Inicio (índice) | https://tyryugen.github.io/m23-menus-ar/ |
+| Login | https://tyryugen.github.io/m23-menus-ar/previews/login.html |
+| Super Admin | https://tyryugen.github.io/m23-menus-ar/previews/super-admin.html |
+| Panel restaurante (Koke Pollo) | https://tyryugen.github.io/m23-menus-ar/previews/restaurant-admin.html |
+| Menú público white-label | https://tyryugen.github.io/m23-menus-ar/previews/menu-koke-pollo.html |
 
-Abre los HTML en el navegador (el logo m23 va embebido en el login).
+### Activar GitHub Pages (1 minuto)
 
-## Documentación técnica
+1. Abre https://github.com/TyrYugen/m23-menus-ar/settings/pages  
+2. **Source**: Deploy from a branch  
+3. **Branch**: `main` → folder `/ (root)` → **Save**  
+4. Espera 1–2 minutos y abre las URLs de arriba.
 
-Ver carpeta [`docs/`](docs/) (esqueleto de arquitectura, schema, roadmap).
+## Interfaces en el repo
+
+- `index.html` — hub de previews
+- `previews/login.html` — Google / Apple / Email (branding m23)
+- `previews/super-admin.html` — dashboard global, restaurantes, 3D, soporte
+- `previews/restaurant-admin.html` — panel del cliente (Koke Pollo)
+- `previews/menu-koke-pollo.html` — menú público + AR
 
 ## Stack previsto
 
-- Next.js 15 (App Router) + TypeScript + Tailwind + shadcn/ui
-- Supabase (Auth, PostgreSQL + RLS, Storage)
-- `@google/model-viewer`
-- Cloudflare (proxy, wildcard, Custom Hostnames)
-- Jobs 3D: Inngest / APIs IA (Meshy, Tripo) o fotogrametría
+Next.js 15 · Supabase · model-viewer · Cloudflare · Jobs 3D
 
-## Estructura prevista del código
+## Docs
 
-```
-app/
-  (auth)/login/
-  (superadmin)/admin/
-  (restaurant)/dashboard/
-  (public-menu)/          # white-label por Host
-  middleware.ts           # resuelve tenant por subdomain | custom_domain
-  api/
-components/
-  model-viewer.tsx
-  ar-preview-modal.tsx
-  custom-domain-setup.tsx
-lib/
-  tenants.ts
-  domains.ts
-  supabase/
-supabase/migrations/
-```
-
-## Estado
-
-Proyecto en fase de diseño y esqueleto. Previews de UI y documento técnico listos para arrancar el desarrollo en local.
-
-## Licencia
-
-Privado / uso del propietario del repositorio (m23).
+[docs/ARQUITECTURA.md](docs/ARQUITECTURA.md)
