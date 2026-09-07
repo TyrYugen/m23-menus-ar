@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koke Pollo · Menú</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    :root {
+      --bg: #0c0a09;
+      --surface: #1c1917;
+      --surface-2: #292524;
+      --text: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #f97316;
+      --accent-soft: #fb923c;
+      --success: #22c55e;
+      --radius: 16px;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(12,10,9,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #292524;
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      display: grid; place-items: center; font-weight: 800; font-size: 18px;
+    }
+    .brand h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+    .brand p { font-size: 0.75rem; color: var(--muted); }
+    .badge-live {
+      font-size: 0.7rem; color: var(--success);
+      background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);
+      padding: 4px 10px; border-radius: 999px;
+    }
+    .hero { padding: 28px 20px 12px; text-align: center; }
+    .hero h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+    .hero p { color: var(--muted); font-size: 0.9rem; max-width: 420px; margin: 0 auto; }
+    .cats {
+      display: flex; gap: 8px; overflow-x: auto; padding: 12px 20px 8px;
+      scrollbar-width: none;
+    }
+    .cats::-webkit-scrollbar { display: none; }
+    .cat {
+      flex-shrink: 0; padding: 8px 16px; border-radius: 999px;
+      background: var(--surface); border: 1px solid #333;
+      font-size: 0.85rem; color: var(--muted); cursor: pointer;
+      transition: all 0.15s;
+    }
+    .cat.active, .cat:hover {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      padding: 16px 20px 40px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid #292524;
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); border-color: #44403c; }
+    .card-img {
+      position: relative; aspect-ratio: 16/11;
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+    .card-img .placeholder {
+      width: 100%; height: 100%;
+      display: grid; place-items: center;
+      font-size: 3rem; background: linear-gradient(145deg, #292524, #1c1917);
+    }
+    .ar-pill {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(6px);
+      color: #fff; font-size: 0.7rem; font-weight: 600;
+      padding: 5px 10px; border-radius: 999px;
+    }
+    .card-body { padding: 14px 16px 16px; }
+    .card-body h3 { font-size: 1.05rem; font-weight: 650; margin-bottom: 4px; }
+    .card-body .desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; min-height: 2.4em; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .price { font-size: 1.1rem; font-weight: 700; color: var(--accent-soft); }
+    .btn-ar {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 10px;
+      padding: 9px 14px; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-ar:hover { background: #ea580c; }
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border-radius: 20px;
+      width: 100%; max-width: 520px; overflow: hidden;
+      border: 1px solid #333;
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-bottom: 1px solid #292524;
+    }
+    .close-btn {
+      background: transparent; border: none; color: var(--muted);
+      font-size: 1.4rem; cursor: pointer; line-height: 1;
+    }
+    model-viewer {
+      width: 100%; height: 340px; background: #111;
+    }
+    .modal-actions {
+      padding: 12px 16px 16px; display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .btn-secondary {
+      flex: 1; min-width: 120px;
+      background: var(--surface-2); color: var(--text);
+      border: 1px solid #444; border-radius: 10px;
+      padding: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    }
+    .btn-primary {
+      flex: 1; min-width: 120px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 10px;
+      padding: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    }
+    footer {
+      text-align: center; padding: 24px 16px 32px;
+      color: #57534e; font-size: 0.75rem;
+    }
+    .demo-banner {
+      background: #1e3a5f; color: #93c5fd; text-align: center;
+      font-size: 0.75rem; padding: 8px 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">
+    PREVIEW · Menú white-label de <strong>Koke Pollo</strong> · URL real: <strong>kokepollo.cl</strong> · Sin marca de la plataforma m23
+  </div>
+  <header>
+    <div class="brand">
+      <div class="logo">KP</div>
+      <div>
+        <h1>Koke Pollo</h1>
+        <p>Pollo a la brasa · Delivery &amp; local</p>
+      </div>
+    </div>
+    <span class="badge-live">● Menú en vivo</span>
+  </header>
+  <section class="hero">
+    <h2>Nuestro menú</h2>
+    <p>Toca «Ver en AR» para ver el plato en tamaño real sobre tu mesa, desde el navegador.</p>
+  </section>
+  <nav class="cats">
+    <button class="cat active">Todos</button>
+    <button class="cat">Brasas</button>
+    <button class="cat">Combos</button>
+    <button class="cat">Acompañamientos</button>
+    <button class="cat">Bebidas</button>
+  </nav>
+  <main class="grid">
+    <article class="card">
+      <div class="card-img"><div class="placeholder">🍗</div><span class="ar-pill">✦ AR disponible</span></div>
+      <div class="card-body">
+        <h3>1/4 Pollo a la brasa</h3>
+        <p class="desc">Jugoso, marinación 24 h, piel crocante. Con papas fritas y ensalada.</p>
+        <div class="row">
+          <span class="price">$4.990</span>
+          <button class="btn-ar" onclick="openAR('1/4 Pollo a la brasa')">◈ Ver en AR</button>
+        </div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img"><div class="placeholder">🍗🍟</div><span class="ar-pill">✦ AR disponible</span></div>
+      <div class="card-body">
+        <h3>1/2 Pollo + papas familiares</h3>
+        <p class="desc">Ideal para compartir. Incluye dos salsas de la casa.</p>
+        <div class="row">
+          <span class="price">$9.490</span>
+          <button class="btn-ar" onclick="openAR('1/2 Pollo + papas')">◈ Ver en AR</button>
+        </div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img"><div class="placeholder">🥗</div><span class="ar-pill">✦ AR disponible</span></div>
+      <div class="card-body">
+        <h3>Ensalada César con pollo</h3>
+        <p class="desc">Lechuga romana, croutons, parmesano y aderezo casero.</p>
+        <div class="row">
+          <span class="price">$5.490</span>
+          <button class="btn-ar" onclick="openAR('Ensalada César')">◈ Ver en AR</button>
+        </div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img"><div class="placeholder">🥤</div></div>
+      <div class="card-body">
+        <h3>Bebida 1.5 L</h3>
+        <p class="desc">Coca-Cola, Sprite o Fanta.</p>
+        <div class="row">
+          <span class="price">$1.890</span>
+          <button class="btn-ar" style="opacity:0.5;pointer-events:none">Sin AR</button>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer>Koke Pollo · Santiago, Chile</footer>
+  <div class="modal-overlay" id="arModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="arTitle">Plato en 3D / AR</h3>
+        <button class="close-btn" onclick="closeAR()">×</button>
+      </div>
+      <model-viewer id="viewer" src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" alt="Modelo 3D" ar ar-modes="webxr scene-viewer quick-look" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="1"></model-viewer>
+      <div class="modal-actions">
+        <button class="btn-secondary" type="button">Rotar 360°</button>
+        <button class="btn-primary" type="button" onclick="activateAR()">Abrir cámara AR</button>
+      </div>
+      <p style="padding:0 16px 14px; font-size:0.75rem; color:#a8a29e; text-align:center;">iPhone: AR Quick Look · Android: Scene Viewer · Desktop: 360°</p>
+    </div>
+  </div>
+  <script>
+    function openAR(name) {
+      document.getElementById('arTitle').textContent = name + ' · Vista 3D / AR';
+      document.getElementById('arModal').classList.add('open');
+    }
+    function closeAR() {
+      document.getElementById('arModal').classList.remove('open');
+    }
+    function activateAR() {
+      const mv = document.getElementById('viewer');
+      if (mv.canActivateAR) mv.activateAR();
+      else alert('AR nativo no disponible en este dispositivo. Puedes rotar el modelo 360°.');
+    }
+    document.getElementById('arModal').addEventListener('click', (e) => {
+      if (e.target.id === 'arModal') closeAR();
+    });
+  </script>
+</body>
+</html>
