@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>m23 · Menús AR · Previews</title>
+  <style>
+    :root {
+      --bg: #070f1a;
+      --surface: #0f2137;
+      --border: #1e3a5f;
+      --text: #f0f9ff;
+      --muted: #94a3b8;
+      --grad: linear-gradient(135deg, #2563eb, #0ea5e9, #06b6d4);
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh;
+      padding: 40px 20px 60px;
+      background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.25), transparent);
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    h1 {
+      font-size: 1.75rem; font-weight: 800; margin-bottom: 8px;
+      background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lead { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; line-height: 1.5; }
+    .grid { display: grid; gap: 14px; }
+    a.card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 18px 20px; transition: border-color 0.15s, transform 0.15s;
+    }
+    a.card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+    a.card h2 { font-size: 1.05rem; margin-bottom: 6px; }
+    a.card p { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
+    .tag {
+      display: inline-block; margin-top: 10px; font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 999px; background: rgba(37,99,235,0.2); color: #93c5fd;
+    }
+    footer { margin-top: 36px; font-size: 0.8rem; color: #64748b; }
+    footer a { color: #67e8f9; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>m23 · Menús AR</h1>
+    <p class="lead">
+      Previews de interfaces del SaaS multi-tenant: login, super admin, panel del restaurante y menú público white-label.
+    </p>
+    <div class="grid">
+      <a class="card" href="previews/login.html">
+        <h2>Login</h2>
+        <p>Inicio de sesión con Google, Apple y correo. Branding m23.</p>
+        <span class="tag">Auth</span>
+      </a>
+      <a class="card" href="previews/super-admin.html">
+        <h2>Super Admin</h2>
+        <p>Dashboard global, restaurantes, dominios, cola 3D y tickets de soporte.</p>
+        <span class="tag">Plataforma</span>
+      </a>
+      <a class="card" href="previews/restaurant-admin.html">
+        <h2>Panel restaurante · Koke Pollo</h2>
+        <p>Gestión de menú, subida de media, AR y dominio propio (kokepollo.cl).</p>
+        <span class="tag">Cliente</span>
+      </a>
+      <a class="card" href="previews/menu-koke-pollo.html">
+        <h2>Menú público · Koke Pollo</h2>
+        <p>Vista del comensal: white-label + botón Ver en AR / 360°.</p>
+        <span class="tag">Público</span>
+      </a>
+    </div>
+    <footer>
+      Repo: <a href="https://github.com/TyrYugen/m23-menus-ar">github.com/TyrYugen/m23-menus-ar</a>
+    </footer>
+  </div>
+</body>
+</html>
